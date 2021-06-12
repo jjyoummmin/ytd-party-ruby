@@ -1,0 +1,19 @@
+  <div id="main">
+    <a href="/home" class="leavechat">✖</a>
+    <div id="player" style="pointer-events: none"></div>
+    <div class="controls">
+      <input id="slider" type="range" min="0" max="100" value="0" step="1"/>
+      <button id="playBtn">재생</button>
+      <button id="pauseBtn">일시정지</button>
+      <span id="volumeEmoji">🔊</span>
+      <input id="volume" orient="vertical" type="range" min="0" max="100" value="100" step="1"/>
+      <span class="chatopen">💬채팅열기</span>
+    </div>
+  </div>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn">&times;</a>        
+    <ul id="messages"></ul>
+    <form id="form" action="">
+      <input id="input" autocomplete="off" /><button>Send</button>
+    </form>
+  </div>

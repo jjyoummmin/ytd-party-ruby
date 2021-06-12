@@ -1,0 +1,187 @@
+* {box-sizing: border-box;} 
+
+body {
+    background-color:rgba(0, 0, 0, 0.836);
+    color:white;
+    display: inline-block;
+}
+
+
+ header {
+     width:100%;
+     height:80px;
+  }
+  
+  .logo {
+     position: absolute;
+     top:20px;
+     left:30px;
+     width:150px;
+  }
+  
+  .nav{
+    position: absolute;
+    top:15px;
+    right:40px;
+  }
+
+  .logout{
+    background-color: #cc3f3f;
+  color:white;
+  padding:10px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-top:25px;
+  }
+
+  .logout:hover {
+    background-color: brown;
+  }
+
+
+
+/* 플레이 팝업 */
+button {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 15px;
+  padding:12px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background-color:#3b8a3d;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.cancelbtn {
+  padding: 13px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+  color:black;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 8% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 50%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+ 
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+     width: 100%;
+  }
+}
+
+  .rooms {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 95%;
+    margin-left: 3%;
+    margin-right: 3%;
+
+
+}
+
+.rooms >li {
+  width: 280px;
+  height: 150px;
+  display: block;
+
+  background-size: cover;
+  background-position: center;
+
+  color: white;
+  font-size: 13px;
+  margin : 17px 5px;
+}
+
+.rooms img {
+  width: 280px;
+  height:130px;
+  border-radius: 6px;
+}
+
+.rooms div{
+  width:280px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding:2px;
+}
+
