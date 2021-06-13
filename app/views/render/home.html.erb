@@ -15,7 +15,7 @@
             <p>재생할 비디오의 url을 입력해 주세요</p>
             <hr>
             <b>URL</b>
-            <%= form.text_field :url, placeholder: 'url 입력하세요', required:true %>
+            <%= form.text_field :video_url, placeholder: 'url 입력하세요', required:true %>
             <div class="clearfix">
                 <button type="button" class="cancelbtn">취소</button>
                 <button type="submit" class="signupbtn">재생 시작</button>
@@ -29,6 +29,13 @@
 </header>
 
 <div class="rooms">
-
-
+  <% @rooms.each do |room| %>
+    <li>
+      <%= link_to chat_path(room.room_id) do %>
+      <%= image_tag image_url("https://img.youtube.com/vi/#{room.video_id}/mqdefault.jpg") %>
+      <% end %>
+       <div><%=room.title%></div>
+      <div><%=room.host%>님이 호스트 중</div>
+  </li>
+  <% end %>
 </div>

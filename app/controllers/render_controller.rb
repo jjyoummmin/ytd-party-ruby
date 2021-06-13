@@ -8,6 +8,8 @@ class RenderController < ApplicationController
     end
 
     def home
+        @rooms = Room.all
+        print @rooms
         render(:layout => "layouts/home")
     end
 

@@ -5,7 +5,7 @@ class ApiController < ApplicationController
 
         room = Room.new
         room.room_id = IdGenerator.generate
-        room.video_url = params[:video_url]        
+        room.video_id = params[:video_url].match(/(?<=\?v=).+$/).to_s        
         room.title = video.title
         room.host = "김아무개"       #=> devise 적용 후 수정할 것 current_user 
         room.save

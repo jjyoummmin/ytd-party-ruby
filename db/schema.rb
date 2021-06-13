@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_13_051611) do
+ActiveRecord::Schema.define(version: 2021_06_13_064205) do
 
   create_table "rooms", force: :cascade do |t|
     t.string "room_id"
-    t.string "video_url"
+    t.string "video_id"
     t.string "title"
     t.string "host"
     t.datetime "created_at", precision: 6, null: false
