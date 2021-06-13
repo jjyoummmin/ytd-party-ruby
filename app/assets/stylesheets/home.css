@@ -4,6 +4,7 @@ body {
     background-color:rgba(0, 0, 0, 0.836);
     color:white;
     display: inline-block;
+    
 }
 
 
@@ -23,6 +24,7 @@ body {
     position: absolute;
     top:15px;
     right:40px;
+    font-family: 'Do Hyeon', sans-serif;
   }
 
   .logout{
@@ -32,6 +34,7 @@ body {
   border-radius: 6px;
   text-decoration: none;
   margin-top:25px;
+  font-size:15px;
   }
 
   .logout:hover {
@@ -45,7 +48,8 @@ button {
   background-color: #4CAF50;
   color: white;
   font-size: 15px;
-  padding:12px 14px;
+  font-family: 'Do Hyeon', sans-serif;
+  padding:9px 11px;
   border-radius: 6px;
   border: none;
   cursor: pointer;
@@ -74,6 +78,7 @@ input[type=text]:focus, input[type=password]:focus {
 .cancelbtn {
   padding: 13px 20px;
   background-color: #f44336;
+  height:40px;
 }
 
 /* Float cancel and signup buttons and add an equal width */

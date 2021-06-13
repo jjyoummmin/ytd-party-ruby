@@ -1,6 +1,7 @@
 body {
     background-color:rgba(0, 0, 0, 0.836);
     color:white;
+    font-family: 'Do Hyeon', sans-serif;
   }
   
   /* 메인화면 */
@@ -142,7 +143,8 @@ body {
       border-radius: 2px;
       color:white;
       background-color: rgb(185 185 185 / 34%);
-      word-wrap: break-word
+      word-wrap: break-word;
+      font-weight: lighter;
     }
   
     #messages > li.me {
