@@ -31,7 +31,7 @@
 <div class="rooms">
   <% @rooms.each do |room| %>
     <li>
-      <%= link_to chat_path(room.room_id) do %>
+      <%= link_to chat_path(:room_id => room.room_id, :video_id => room.video_id) do %>
       <%= image_tag image_url("https://img.youtube.com/vi/#{room.video_id}/mqdefault.jpg") %>
       <% end %>
        <div><%=room.title%></div>

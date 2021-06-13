@@ -1,3 +1,6 @@
+const url = window.location.href;
+const video_id = [...url.match(/(?<=&video_id=).+$/)][0];
+
 let player;
 window.onYouTubeIframeAPIReady = () => {
   (async function () {
@@ -5,7 +8,7 @@ window.onYouTubeIframeAPIReady = () => {
     player = new YT.Player('player', {
       height: '480px',
       width: '100%',
-      videoId: '0av4PuSWv0w',
+      videoId: video_id,
       playerVars: {
         autoplay: 0,                
         modestbranding: 1,          
