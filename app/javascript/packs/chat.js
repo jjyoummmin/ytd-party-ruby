@@ -1,28 +1,34 @@
+import hostChatRoomChannel from "../channels/host_chat_room_channel";
+import guestChatRoomChannel from "../channels/guest_chat_room_channel";
+
 const url = window.location.href;
 const video_id = [...url.match(/(?<=&video_id=).+$/)][0];
+const room_id = [...url.match(/(?<=\?room_id=)[^&]+/)][0];
+
+const HOST = true;
 
 let player;
+let chatRoomChannel;
+
 window.onYouTubeIframeAPIReady = () => {
-  (async function () {
-    console.log("ytd-ready");
-    player = new YT.Player('player', {
-      height: '480px',
-      width: '100%',
-      videoId: video_id,
-      playerVars: {
-        autoplay: 0,                
-        modestbranding: 1,          
-        controls: 0,                 
-        disablekb: 1,               
-        enablejsapi: 1,              
-      },
-    });
-  })();
+  console.log("ytd-ready");
+  player = new YT.Player('player', {
+    height: '480px',
+    width: '100%',
+    videoId: video_id,
+    playerVars: {
+      autoplay: 0,                
+      modestbranding: 1,          
+      controls: 0,                 
+      disablekb: 1,               
+      enablejsapi: 1,              
+    },
+  });
+  console.log("소켓 연결 한다")
+  chatRoomChannel = HOST ? hostChatRoomChannel(room_id, player) : guestChatRoomChannel(room_id, player);
 }
 
 $(function () {
-    //각종 이벤트 핸들러 등록하기
-    //두번이상 참조되는 dom들은 따로 상수화
     const $mySidenav = $('#mySidenav');
     const sn = document.getElementById('mySidenav');
     const $main = $('#main');
@@ -43,23 +49,30 @@ $(function () {
       $chatopen.removeClass('hide');
     })
   
-    $('#playBtn').on('click', playVideo);
-    $('#pauseBtn').on('click', pauseVideo);
     $('#form').on('submit', sendMessage);
-    $('#slider').on('input', (e) => changeTime(e.target))
     $('#volume').on('input', (e) => changeVolume(e.target))
 
-    function moveSlider(){
+    if(HOST){
+      $('#playBtn').on('click', playVideo);
+      $('#pauseBtn').on('click', pauseVideo);
+      $('#slider').on('input', (e) => changeTime(e.target))
+    }
+
+
+      function moveSlider(){
         let fraction = player.getCurrentTime() / player.getDuration() * 100;
         $slider.val(fraction);
+        chatRoomChannel.to_all({type: "slider", value : fraction})
       }
     
       function playVideo() {
+        chatRoomChannel.to_all({type: "play"})
         player.playVideo();
         setInterval(moveSlider, 200)
       }
     
       function pauseVideo() {
+        chatRoomChannel.to_all({type: "pause"})
         player.pauseVideo();
         clearInterval(moveSlider)
       }
@@ -69,6 +82,7 @@ $(function () {
         console.log("changeTime");
         let goTo = player.getDuration() * (self.value / 100);
         self.value = goTo;
+        chatRoomChannel.to_all({type: "update", goTo})
         player.seekTo(goTo, true);
       }
     
@@ -78,8 +92,9 @@ $(function () {
     
       function sendMessage(e){
         e.preventDefault();
-        let msg =  $input.val();
-        if(!msg) return;
+        let message =  $input.val();
+        if(!message) return;
+        chatRoomChannel.to_all({type: "chat message", message})
         $input.val('');
         $messages.append(`<li class="me">${msg}</li>`);
         sn.scrollTo(0,sn.scrollHeight);

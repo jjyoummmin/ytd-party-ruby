@@ -14,8 +14,8 @@ class RenderController < ApplicationController
     end
 
     def chat
-        @room_id = params[:room_id]
-        @video_id = params[:video_id]
+        # host = Rooms.find_by(room_id: params[:room_id]).host
+        @host = true
         render(:layout => "layouts/chat")
     end
 end
