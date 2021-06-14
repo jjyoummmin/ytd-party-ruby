@@ -2,8 +2,8 @@
 <a href="/"><%= image_tag "logo.png", class: "logo" %></a>
 
 <div class="nav">
-  <%="닉네임"%> 님 안녕하세요 
-  <a href="/login/logout" class="logout">로그아웃</a>
+  <%= @name %> 님 안녕하세요 
+  <%= link_to "로그아웃", destroy_user_session_path, method: :delete, class:"logout"  %>
 
     <button id="playbtn" style="width:auto;">플레이</button>
 

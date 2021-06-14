@@ -1,4 +1,5 @@
 Rails.application.routes.draw do  
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks',  sessions: 'users/sessions' }
   get '/' => 'render#welcome'
   get 'login' => 'render#login', :as => 'login'
   get 'home' => 'render#home'

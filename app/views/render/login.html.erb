@@ -1,7 +1,7 @@
 <a href='/'><%= image_tag "logo.png", class: "logo" %></a>
 <div class="container">
     <div class="google">구글로 로그인하기</div>
-    <div class="facebook">페이스북으로 로그인하기</div>
+    <%= link_to "페이스북으로 로그인하기", user_facebook_omniauth_authorize_path , class: "facebook"%>
     <div class="kakao">카카오로 로그인하기</div>
     <div class="naver">네이버로 로그인하기</div>
 </div>
