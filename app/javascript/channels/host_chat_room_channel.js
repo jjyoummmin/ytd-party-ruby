@@ -3,8 +3,10 @@ import consumer from "./consumer"
 const hostChatRoomChannel = (room_id, player) => {
   const $messages = $('#messages');
   const sn = document.getElementById('mySidenav');
+  const {name, ishost} = $('#userinfo').data();
+  console.log(name, ishost);
 
-  return consumer.subscriptions.create({channel: "ChatRoomChannel", room_id }, {
+  return consumer.subscriptions.create({channel: "ChatRoomChannel", room_id, name, ishost }, {
     connected() {
       // Called when the subscription is ready for use on the server
       console.log("Connected to the chat room!");
