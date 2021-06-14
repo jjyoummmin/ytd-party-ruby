@@ -15,8 +15,8 @@ class RenderController < ApplicationController
     end
 
     def chat
-        # host = Rooms.find_by(room_id: params[:room_id]).host
-        @host = true
+        @name = current_user.name
+        @host = Room.find_by(room_id: params[:room_id]).host_email == current_user.email
         render(:layout => "layouts/chat")
     end
 end

@@ -1,9 +1,9 @@
 import consumer from "./consumer"
 
-const $messages = $('#messages');
-const sn = document.getElementById('mySidenav');
-
 const hostChatRoomChannel = (room_id, player) => {
+  const $messages = $('#messages');
+  const sn = document.getElementById('mySidenav');
+
   return consumer.subscriptions.create({channel: "ChatRoomChannel", room_id }, {
     connected() {
       // Called when the subscription is ready for use on the server

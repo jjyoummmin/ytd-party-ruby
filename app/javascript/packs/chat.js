@@ -103,7 +103,7 @@ $(function () {
         if(!message) return;
         chatRoomChannel.to_all({type: "chat message", message})
         $input.val('');
-        $messages.append(`<li class="me">${msg}</li>`);
+        $messages.append(`<li class="me">${message}</li>`);
         sn.scrollTo(0,sn.scrollHeight);
       }
 
