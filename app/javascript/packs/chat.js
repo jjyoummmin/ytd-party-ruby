@@ -65,13 +65,13 @@ $(function () {
       function moveSlider(){
         let fraction = player.getCurrentTime() / player.getDuration() * 100;
         $slider.val(fraction);
-        chatRoomChannel.to_all({type: "slider", value : fraction})
+        chatRoomChannel.to_all({type: "slider", value : fraction}, name)
       }
     
       function playVideo() {
         if(playing) return;
         playing = true;
-        chatRoomChannel.to_all({type: "play"})
+        chatRoomChannel.to_all({type: "play"}, name)
         player.playVideo();
         interval = setInterval(moveSlider, 2000)
       }
@@ -79,7 +79,7 @@ $(function () {
       function pauseVideo() {
         if(!playing) return;
         playing = false;
-        chatRoomChannel.to_all({type: "pause"})
+        chatRoomChannel.to_all({type: "pause"}, name)
         player.pauseVideo();
         clearInterval(interval)
       }
@@ -88,8 +88,7 @@ $(function () {
       function changeTime(self) {
         console.log("changeTime");
         let goTo = player.getDuration() * (self.value / 100);
-        self.value = goTo;
-        chatRoomChannel.to_all({type: "update", goTo})
+        chatRoomChannel.to_all({type: "update", goTo}, name)
         player.seekTo(goTo, true);
       }
     
@@ -101,7 +100,7 @@ $(function () {
         e.preventDefault();
         let message =  $input.val();
         if(!message) return;
-        chatRoomChannel.to_all({type: "chat message", message})
+        chatRoomChannel.to_all({type: "chat message", message}, name)
         $input.val('');
         $messages.append(`<li class="me">${message}</li>`);
         sn.scrollTo(0,sn.scrollHeight);

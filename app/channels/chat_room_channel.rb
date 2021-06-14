@@ -6,7 +6,7 @@ class ChatRoomChannel < ApplicationCable::Channel
 
     host = Room.find_by(room_id: params[:room_id]).host
     unless(params[:ishost])
-      ActionCable.server.broadcast "chat_room_channel_#{host}", {type: 'sync host', sent_by: params[:name]}
+      ActionCable.server.broadcast "chat_room_channel_#{host}", {body: {type: 'sync host', sent_by: params[:name]}, sender: params[:name]}
     end
   end
 
@@ -15,10 +15,10 @@ class ChatRoomChannel < ApplicationCable::Channel
   end
 
   def to_all(data)  
-    ActionCable.server.broadcast "chat_room_channel_#{data["room_id"]}", data["body"]
+    ActionCable.server.broadcast "chat_room_channel_#{data["room_id"]}", {body: data["body"], sender: data["sender"]}
   end
 
   def to_one(data)
-    ActionCable.server.broadcast "chat_room_channel_#{data["name"]}", data["body"]
+    ActionCable.server.broadcast "chat_room_channel_#{data["name"]}", {body: data["body"], sender: data["sender"]}
   end
 end

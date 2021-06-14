@@ -1,7 +1,6 @@
 import consumer from "./consumer"
 
 
-
 const guestChatRoomChannel = (room_id, player) => {
   const $slider = $('#slider');
   const $messages = $('#messages');
@@ -21,7 +20,12 @@ const guestChatRoomChannel = (room_id, player) => {
 
     received(data) {
       // Called when there's incoming data on the websocket for this channel
-      const type = data.type;
+      const {body, sender} = data;
+
+      // 자기 자신이 보낸 메세지면 끝내기
+      if(sender == name) return;
+
+      const type = body.type;
       if (type == 'play') {
         player.playVideo();
       }
@@ -29,23 +33,23 @@ const guestChatRoomChannel = (room_id, player) => {
         player.pauseVideo();
       }
       else if (type == 'slider') {
-        $slider.val(data);
+        $slider.val(body);
       }
       else if (type == 'update') {
-        $slider.val(data.goTo);
-        player.seekTo(data.goTo, true);
+        $slider.val(body.goTo);
+        player.seekTo(body.goTo, true);
       }
       else if (type == 'info message') {
-        $messages.append(`<li class="info">${data.message}</li>`);
+        $messages.append(`<li class="info">${body.message}</li>`);
         sn.scrollTo(0, sn.scrollHeight);
       }
       else if (type == 'chat message') {
-        $messages.append(`<li>${data.name} : ${data.message}</li>`);
+        $messages.append(`<li>${sender} : ${body.message}</li>`);
         sn.scrollTo(0, sn.scrollHeight);
       }
       else if (type == 'sync host') {
-        if (data.state == 1 || data.state == 3) {
-          player.seekTo(data.time, true);
+        if (body.state == 1 || body.state == 3) {
+          player.seekTo(body.time, true);
           player.playVideo();
         }
       } else {

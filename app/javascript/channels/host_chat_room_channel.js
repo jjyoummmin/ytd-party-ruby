@@ -17,22 +17,25 @@ const hostChatRoomChannel = (room_id, player) => {
     },
   
     received(data) {
-      console.log("received data!!!!!!!");
+      const {body, sender} = data;
+      console.log(data.body.type);
+      if(sender == name) return;
+
       // Called when there's incoming data on the websocket for this channel
-      const type = data.type;
+      const type = body.type;
 
       if(type=='info message'){
-        $messages.append(`<li class="info">${data.message}</li>`);
+        $messages.append(`<li class="info">${body.message}</li>`);
         sn.scrollTo(0,sn.scrollHeight);
       }
       else if(type=='chat message'){
-        $messages.append(`<li>${data.name} : ${data.message}</li>`);
+        $messages.append(`<li>${sender} : ${body.message}</li>`);
         sn.scrollTo(0,sn.scrollHeight);
       }
       else if(type=='sync host'){
         const state= player.getPlayerState();
         const time = player.getCurrentTime();
-        this.to_one(data.sent_by, {type:'sync host', state, time});
+        this.to_one(body.sent_by, {type:'sync host', state, time}, name);
       }else{
         console.log("ERROR : 잘못된 메세지 타입입니다.");
       }
