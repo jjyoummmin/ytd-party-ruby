@@ -53,8 +53,8 @@ const guestChatRoomChannel = (room_id, player) => {
       }
     },
 
-    to_all(body) {
-      this.perform('to_all', { room_id, body })
+    to_all(body, sender) {
+      this.perform('to_all', { room_id, body, sender })
     },
   });
 }

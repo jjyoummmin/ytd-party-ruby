@@ -5,8 +5,6 @@ const url = window.location.href;
 const video_id = [...url.match(/(?<=&video_id=).+$/)][0];
 const room_id = [...url.match(/(?<=\?room_id=)[^&]+/)][0];
 
-const HOST = true;
-
 let player;
 let chatRoomChannel;
 let playing = false;
@@ -26,11 +24,10 @@ window.onYouTubeIframeAPIReady = () => {
       enablejsapi: 1,              
     },
   });
-  console.log("소켓 연결 한다")
-  chatRoomChannel = HOST ? hostChatRoomChannel(room_id, player) : guestChatRoomChannel(room_id, player);
 }
 
 $(function () {
+    const {name, ishost} = $('#userinfo').data();
     const $mySidenav = $('#mySidenav');
     const sn = document.getElementById('mySidenav');
     const $main = $('#main');
@@ -38,7 +35,10 @@ $(function () {
     const $messages = $('#messages');
     const $input = $('#input');
     const $slider = $('#slider');
-  
+
+    console.log("소켓 연결 한다")
+    chatRoomChannel = ishost ? hostChatRoomChannel(room_id, player) : guestChatRoomChannel(room_id, player);
+
     $('.chatopen').click((e) => {
       $mySidenav.width('300px');
       $main.css({ marginRight: "330px" });
@@ -54,7 +54,7 @@ $(function () {
     $('#form').on('submit', sendMessage);
     $('#volume').on('input', (e) => changeVolume(e.target))
 
-    if(HOST){
+    if(ishost){
       $('#playBtn').on('click', playVideo);
       $('#pauseBtn').on('click', pauseVideo);
       $('#slider').on('input', (e) => changeTime(e.target))

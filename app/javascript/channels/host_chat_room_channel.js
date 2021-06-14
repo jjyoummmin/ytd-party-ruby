@@ -38,12 +38,12 @@ const hostChatRoomChannel = (room_id, player) => {
       }
     },
   
-    to_all(body) {
-      this.perform('to_all', {room_id, body})
+    to_all(body, sender) {
+      this.perform('to_all', {room_id, body, sender})
     },  
 
-    to_one(name, body){
-      this.perform('to_one', {name, body})
+    to_one(name, body, sender){
+      this.perform('to_one', {name, body, sender})
     }
   });
 }
