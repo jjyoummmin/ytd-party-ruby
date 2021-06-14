@@ -1,12 +1,13 @@
 class ChatRoomChannel < ApplicationCable::Channel
   def subscribed
     stream_from "chat_room_channel_#{params[:room_id]}"
-    stream_from "chat_room_channel_#{"김아무개"}"
+    stream_from "chat_room_channel_#{params[:name]}"
     # params => js 에서 consumer.subscriptions.create 시에 넘겨준 값
-    
-    # if(false){
-    #   ActionCable.server.broadcast "chat_room_channel_#{host}", {type: 'sync host', sent_by: "김아무개"}
-    # }
+
+    host = Room.find_by(room_id: params[:room_id]).host
+    unless(params[:ishost])
+      ActionCable.server.broadcast "chat_room_channel_#{host}", {type: 'sync host', sent_by: params[:name]}
+    end
   end
 
   def unsubscribed
