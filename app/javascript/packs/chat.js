@@ -9,6 +9,8 @@ const HOST = true;
 
 let player;
 let chatRoomChannel;
+let playing = false;
+let interval;
 
 window.onYouTubeIframeAPIReady = () => {
   console.log("ytd-ready");
@@ -59,6 +61,7 @@ $(function () {
     }
 
 
+
       function moveSlider(){
         let fraction = player.getCurrentTime() / player.getDuration() * 100;
         $slider.val(fraction);
@@ -66,15 +69,19 @@ $(function () {
       }
     
       function playVideo() {
+        if(playing) return;
+        playing = true;
         chatRoomChannel.to_all({type: "play"})
         player.playVideo();
-        setInterval(moveSlider, 200)
+        interval = setInterval(moveSlider, 2000)
       }
     
       function pauseVideo() {
+        if(!playing) return;
+        playing = false;
         chatRoomChannel.to_all({type: "pause"})
         player.pauseVideo();
-        clearInterval(moveSlider)
+        clearInterval(interval)
       }
     
     

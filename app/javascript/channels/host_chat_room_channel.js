@@ -18,7 +18,7 @@ const hostChatRoomChannel = (room_id, player) => {
       console.log("received data!!!!!!!");
       // Called when there's incoming data on the websocket for this channel
       const type = data.type;
-     
+
       if(type=='info message'){
         $messages.append(`<li class="info">${data.message}</li>`);
         sn.scrollTo(0,sn.scrollHeight);
