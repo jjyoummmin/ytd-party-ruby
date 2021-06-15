@@ -36,8 +36,9 @@ $(function () {
     const $input = $('#input');
     const $slider = $('#slider');
 
-    console.log("소켓 연결 한다")
-    chatRoomChannel = ishost ? hostChatRoomChannel(room_id, player) : guestChatRoomChannel(room_id, player);
+    if(!ishost) $slider.css('pointer-events','none');
+
+    
 
     $('.chatopen').click((e) => {
       $mySidenav.width('300px');
@@ -105,5 +106,9 @@ $(function () {
         $messages.append(`<li class="me">${message}</li>`);
         sn.scrollTo(0,sn.scrollHeight);
       }
+
+      console.log("소켓 연결 한다")
+      console.log("??????", player)
+      chatRoomChannel = ishost ? hostChatRoomChannel(room_id, player) : guestChatRoomChannel(room_id, player);
 
 })

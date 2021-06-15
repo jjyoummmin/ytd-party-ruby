@@ -1,24 +1,30 @@
-# README
+1. git clone
+2. bundle install
+3. rake db:migrate
+4. rails s
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* 만약 루비 버전때문에 안되면
+```bash
+rbenv install 3.0.1      #루비 3.0.1 설치
+rbenv rehash             #설치한 ruby 재실행
+```
 
-Things you may want to cover:
+* jquery 설정
+```javascript
+//config/webpack/environment.js
 
-* Ruby version
+const { environment } = require('@rails/webpacker')
 
-* System dependencies
+const webpack = require('webpack')
+environment.plugins.append('Provide', new webpack.ProvidePlugin({
+  $: 'jquery',
+  jQuery: 'jquery'
+}))
 
-* Configuration
+module.exports = environment
+```
 
-* Database creation
+* api key 설정
+/config/local_env.template.yml 값 채워서 /config/local_env.yml 으로 저장
 
-* Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

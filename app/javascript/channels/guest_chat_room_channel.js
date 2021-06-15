@@ -2,6 +2,8 @@ import consumer from "./consumer"
 
 
 const guestChatRoomChannel = (room_id, player) => {
+  console.log("PLAYER", player)
+
   const $slider = $('#slider');
   const $messages = $('#messages');
   const sn = document.getElementById('mySidenav');
@@ -27,15 +29,19 @@ const guestChatRoomChannel = (room_id, player) => {
 
       const type = body.type;
       if (type == 'play') {
+        console.log("PLAY");
         player.playVideo();
       }
       else if (type == 'pause') {
+        console.log("PAUSE")
         player.pauseVideo();
       }
       else if (type == 'slider') {
-        $slider.val(body);
+        console.log("SLIDER")
+        $slider.val(body.value);                         
       }
       else if (type == 'update') {
+        console.log("UPDATE")
         $slider.val(body.goTo);
         player.seekTo(body.goTo, true);
       }
