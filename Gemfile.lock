@@ -155,6 +155,9 @@ GEM
       oauth2 (~> 1.1)
       omniauth (~> 1.1)
       omniauth-oauth2 (>= 1.6)
+    omniauth-kakao (0.1.2)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
     omniauth-naver (0.1.0)
       omniauth-oauth2 (~> 1.2)
     omniauth-oauth2 (1.7.1)
@@ -283,6 +286,7 @@ DEPENDENCIES
   omniauth (~> 1.9.1)
   omniauth-facebook
   omniauth-google-oauth2
+  omniauth-kakao
   omniauth-naver (~> 0.1.0)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)

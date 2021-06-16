@@ -42,7 +42,7 @@ const guestChatRoomChannel = (room_id, player) => {
       }
       else if (type == 'update') {
         console.log("UPDATE")
-        $slider.val(body.goTo);
+        // $slider.val(body.goTo);
         player.seekTo(body.goTo, true);
       }
       else if (type == 'info message') {

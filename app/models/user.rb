@@ -7,11 +7,8 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:kakao, :naver, :facebook, :google_oauth2]
 
   def self.from_omniauth(auth)
-    print "============="
-    print auth
-    print auth.provider
     user = User.where(email: auth.info.email).first
-    user ||= User.create!(name: auth.info.name, email: auth.info.email, password: Devise.friendly_token[0, 20])
+    user ||= User.create!(name: auth.info.name , email: auth.info.email, password: Devise.friendly_token[0, 20])
       user
   end       
 end
