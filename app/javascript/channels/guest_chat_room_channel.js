@@ -8,7 +8,6 @@ const guestChatRoomChannel = (room_id, player) => {
   const $messages = $('#messages');
   const sn = document.getElementById('mySidenav');
   const {name, ishost} = $('#userinfo').data();
-  console.log(name, ishost);
 
   return consumer.subscriptions.create({ channel: "ChatRoomChannel", room_id, name, ishost }, {
     connected() {
@@ -54,6 +53,7 @@ const guestChatRoomChannel = (room_id, player) => {
         sn.scrollTo(0, sn.scrollHeight);
       }
       else if (type == 'sync host') {
+        console.log("SYNC HOST GUEST", body.state, body.time)
         if (body.state == 1 || body.state == 3) {
           player.seekTo(body.time, true);
           player.playVideo();

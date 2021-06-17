@@ -35,6 +35,7 @@ const hostChatRoomChannel = (room_id, player) => {
       else if(type=='sync host'){
         const state= player.getPlayerState();
         const time = player.getCurrentTime();
+        console.log("SYNC HOST". body.sent_by, state, time, name)
         this.to_one(body.sent_by, {type:'sync host', state, time}, name);
       }else{
         console.log("ERROR : 잘못된 메세지 타입입니다.");
