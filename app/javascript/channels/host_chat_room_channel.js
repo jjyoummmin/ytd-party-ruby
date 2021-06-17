@@ -28,7 +28,7 @@ const hostChatRoomChannel = (room_id, player) => {
         sn.scrollTo(0,sn.scrollHeight);
       }
       else if(type=='chat message'){
-        $messages.append(`<li>${sender} : ${body.message}</li>`);
+        $messages.append(`<li>${body.name} : ${body.message}</li>`);
         sn.scrollTo(0,sn.scrollHeight);
       }
       else if(type=='sync host'){

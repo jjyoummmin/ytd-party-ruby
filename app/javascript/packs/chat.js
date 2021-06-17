@@ -35,6 +35,7 @@ window.onPlayerReady = (event) => {
 
 $(function () {
   const email = $('#userinfo').data('email');
+  const myname = $('#userinfo').data('myname');
   ishost = $('#userinfo').data('ishost');
   const $mySidenav = $('#mySidenav');
   const sn = document.getElementById('mySidenav');
@@ -113,11 +114,9 @@ $(function () {
     e.preventDefault();
     let message =  $input.val();
     if(!message) return;
-    chatRoomChannel.to_all({type: "chat message", message}, email)
+    chatRoomChannel.to_all({type: "chat message", message, name:myname}, email)
     $input.val('');
     $messages.append(`<li class="me">${message}</li>`);
     sn.scrollTo(0,sn.scrollHeight);
-  }
-
-  
+  } 
 })
