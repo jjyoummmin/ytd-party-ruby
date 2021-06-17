@@ -34,7 +34,7 @@ window.onPlayerReady = (event) => {
 }
 
 $(function () {
-  const name = $('#userinfo').data('name');
+  const email = $('#userinfo').data('email');
   ishost = $('#userinfo').data('ishost');
   const $mySidenav = $('#mySidenav');
   const sn = document.getElementById('mySidenav');
@@ -78,13 +78,13 @@ $(function () {
   function moveSlider(){
     let fraction = player.getCurrentTime() / player.getDuration() * 100;
     $slider.val(fraction);
-    chatRoomChannel.to_all({type: "slider", value : fraction}, name)
+    chatRoomChannel.to_all({type: "slider", value : fraction}, email)
   }
 
   function playVideo() {
     if(playing) return;
     playing = true;
-    chatRoomChannel.to_all({type: "play"}, name)
+    chatRoomChannel.to_all({type: "play"}, email)
     player.playVideo();
     interval = setInterval(moveSlider, 2000)
   }
@@ -92,7 +92,7 @@ $(function () {
   function pauseVideo() {
     if(!playing) return;
     playing = false;
-    chatRoomChannel.to_all({type: "pause"}, name)
+    chatRoomChannel.to_all({type: "pause"}, email)
     player.pauseVideo();
     clearInterval(interval)
   }
@@ -101,7 +101,7 @@ $(function () {
   function changeTime(self) {
     console.log("changeTime");
     let goTo = player.getDuration() * (self.value / 100);
-    chatRoomChannel.to_all({type: "update", goTo}, name)
+    chatRoomChannel.to_all({type: "update", goTo}, email)
     player.seekTo(goTo, true);
   }
 
@@ -113,7 +113,7 @@ $(function () {
     e.preventDefault();
     let message =  $input.val();
     if(!message) return;
-    chatRoomChannel.to_all({type: "chat message", message}, name)
+    chatRoomChannel.to_all({type: "chat message", message}, email)
     $input.val('');
     $messages.append(`<li class="me">${message}</li>`);
     sn.scrollTo(0,sn.scrollHeight);

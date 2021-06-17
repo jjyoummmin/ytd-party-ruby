@@ -3,10 +3,9 @@ import consumer from "./consumer"
 const hostChatRoomChannel = (room_id, player) => {
   const $messages = $('#messages');
   const sn = document.getElementById('mySidenav');
-  const {name, ishost} = $('#userinfo').data();
-  console.log(name, ishost);
+  const {email, ishost} = $('#userinfo').data();
 
-  return consumer.subscriptions.create({channel: "ChatRoomChannel", room_id, name, ishost }, {
+  return consumer.subscriptions.create({channel: "ChatRoomChannel", room_id, email, ishost }, {
     connected() {
       // Called when the subscription is ready for use on the server
       console.log("Connected to the chat room!");
@@ -19,7 +18,7 @@ const hostChatRoomChannel = (room_id, player) => {
     received(data) {
       const {body, sender} = data;
       console.log(data.body.type);
-      if(sender == name) return;
+      if(sender == email) return;
 
       // Called when there's incoming data on the websocket for this channel
       const type = body.type;
@@ -35,8 +34,8 @@ const hostChatRoomChannel = (room_id, player) => {
       else if(type=='sync host'){
         const state= player.getPlayerState();
         const time = player.getCurrentTime();
-        console.log("SYNC HOST". body.sent_by, state, time, name)
-        this.to_one(body.sent_by, {type:'sync host', state, time}, name);
+        console.log("SYNC HOST", body.sent_by, state, time, email)
+        this.to_one(body.sent_by, {type:'sync host', state, time}, email);
       }else{
         console.log("ERROR : 잘못된 메세지 타입입니다.");
       }
@@ -46,8 +45,8 @@ const hostChatRoomChannel = (room_id, player) => {
       this.perform('to_all', {room_id, body, sender})
     },  
 
-    to_one(name, body, sender){
-      this.perform('to_one', {name, body, sender})
+    to_one(email, body, sender){
+      this.perform('to_one', {email, body, sender})
     }
   });
 }

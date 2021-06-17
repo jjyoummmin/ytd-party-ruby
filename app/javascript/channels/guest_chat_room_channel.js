@@ -7,9 +7,9 @@ const guestChatRoomChannel = (room_id, player) => {
   const $slider = $('#slider');
   const $messages = $('#messages');
   const sn = document.getElementById('mySidenav');
-  const {name, ishost} = $('#userinfo').data();
+  const {email, ishost} = $('#userinfo').data();
 
-  return consumer.subscriptions.create({ channel: "ChatRoomChannel", room_id, name, ishost }, {
+  return consumer.subscriptions.create({ channel: "ChatRoomChannel", room_id, email, ishost }, {
     connected() {
       // Called when the subscription is ready for use on the server
       console.log("Connected to the chat room!");
@@ -24,7 +24,7 @@ const guestChatRoomChannel = (room_id, player) => {
       const {body, sender} = data;
 
       // 자기 자신이 보낸 메세지면 끝내기
-      if(sender == name) return;
+      if(sender == email) return;
 
       const type = body.type;
       if (type == 'play') {
